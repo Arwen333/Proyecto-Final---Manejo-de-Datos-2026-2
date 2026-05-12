@@ -4,11 +4,10 @@ import java.util.Scanner;
 
 import domain.interfaces.IState;
 
-public class ExitState implements IState<AppStates> {
+public class ExitState implements IState {
 
-    public IState<AppStates> execute(Scanner sc) {
+    public IState execute(Scanner sc) {
 
-        throw new UnsupportedOperationException("Método no implementado");
+        throw new UnsupportedOperationException(getClass().toString() + " no implementado");
     }
-    public AppStates getId() { return AppStates.Exit; }
 }

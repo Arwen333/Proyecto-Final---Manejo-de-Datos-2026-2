@@ -1,5 +1,13 @@
 package domain.models.states;
 
-public class ExecuteMatchState {
+import java.util.Scanner;
 
+import domain.interfaces.IState;
+
+public class ExecuteMatchState implements IState {
+
+    public IState execute(Scanner sc) {
+
+        throw new UnsupportedOperationException(getClass().toString() + " no implementado");
+    }
 }

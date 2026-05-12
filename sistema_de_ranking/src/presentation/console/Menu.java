@@ -17,7 +17,7 @@ public class Menu {
     //#endregion
 
     //#region CAMPO
-    public Map<Character, String> _options = new LinkedHashMap<>();
+    private Map<Character, String> _options = new LinkedHashMap<>();
     //#endregion
 
     //#region CONSTRUCCIÓN
@@ -25,6 +25,7 @@ public class Menu {
         super();
         exitOption = 's';
     }
+    
     public Menu(char exitOption) {
         super();
         this.exitOption = exitOption;
