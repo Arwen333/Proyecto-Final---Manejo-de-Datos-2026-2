@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
 import domain.interfaces.IState;
-import domain.models.states.AppStates;
+import domain.models.states.ExitState;
 import domain.models.states.MainMenuState;
 
 public class App {
 
-    private static IState<AppStates> _currentState;
+    private static IState _currentState;
     private static final boolean TEST_MODE = true;
     public static void main(String[] args) throws Exception {
 
@@ -16,12 +16,11 @@ public class App {
 
         _currentState = new MainMenuState();
 
-        while (_currentState.getId() != AppStates.Exit) {
+        while (!(_currentState instanceof ExitState)) {
 
             if (TEST_MODE) {
-                System.out.println("App comienza estado " + _currentState.getId().toString());
+                System.out.println("App comienza estado " + _currentState.getClass().toString());
             }
-
             _currentState = _currentState.execute(sc);
         }
 

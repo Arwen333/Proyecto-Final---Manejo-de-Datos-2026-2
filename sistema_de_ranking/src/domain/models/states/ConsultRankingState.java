@@ -1,5 +1,13 @@
 package domain.models.states;
 
-public class ConsultRankingState {
+import java.util.Scanner;
 
+import domain.interfaces.IState;
+
+public class ConsultRankingState implements IState {
+
+    public IState execute(Scanner sc) {
+
+        throw new UnsupportedOperationException(getClass().toString() + " no implementado");
+    }
 }
