@@ -17,7 +17,7 @@ public class App {
         _currentState = new MainMenuState();
 
         while (!(_currentState instanceof ExitState)) {
-
+            System.out.println();
             if (TEST_MODE) {
                 System.out.println("App comienza estado " + _currentState.getClass().toString());
             }
@@ -26,7 +26,8 @@ public class App {
 
         sc.close();
 
-        System.out.println("Gracias por utilziar nuestro sistema de Ranking");
+        System.out.println("Gracias por utilizar nuestro sistema de Ranking.");
+        System.out.println("¡Hasta la próxima!");
 
         
     }

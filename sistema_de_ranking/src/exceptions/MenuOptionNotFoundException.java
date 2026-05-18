@@ -1,6 +1,7 @@
 package exceptions;
 
-public class MenuOptionNotFoundException extends MenuRuntimeException {
-    
+public class MenuOptionNotFoundException extends RuntimeException {
+
     public MenuOptionNotFoundException(String message) { super(message); }
+    
 }

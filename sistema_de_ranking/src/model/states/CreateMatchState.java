@@ -1,7 +1,6 @@
 package model.states;
 
 import java.util.Scanner;
-
 /**
  * @author 
  */
@@ -9,6 +8,7 @@ public class CreateMatchState implements IState {
 
     public IState execute(Scanner sc) {
 
-        throw new UnsupportedOperationException(getClass().toString() + " no implementado");
+        System.out.println(getClass().toString() + " no implementado. Regresando al menú principal");
+        return new MainMenuState();
     }
 }
