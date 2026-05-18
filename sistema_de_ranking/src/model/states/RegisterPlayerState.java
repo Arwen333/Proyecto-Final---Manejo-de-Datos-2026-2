@@ -1,10 +1,10 @@
-package domain.models.states;
+package model.states;
 
 import java.util.Scanner;
-
-import domain.interfaces.IState;
-
-public class ConsultRankingState implements IState {
+/**
+ * @author 
+ */
+public class RegisterPlayerState implements IState {
 
     public IState execute(Scanner sc) {
 

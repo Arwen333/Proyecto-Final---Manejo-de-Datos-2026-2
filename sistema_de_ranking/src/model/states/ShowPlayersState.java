@@ -1,10 +1,10 @@
-package domain.models.states;
+package model.states;
 
 import java.util.Scanner;
-
-import domain.interfaces.IState;
-
-public class CreateMatchState implements IState {
+/**
+ * @author 
+ */
+public class ShowPlayersState implements IState {
 
     public IState execute(Scanner sc) {
 

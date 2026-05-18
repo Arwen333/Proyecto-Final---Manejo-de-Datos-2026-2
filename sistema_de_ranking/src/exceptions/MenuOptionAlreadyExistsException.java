@@ -1,4 +1,4 @@
-package domain.exceptions;
+package exceptions;
 
 public class MenuOptionAlreadyExistsException extends MenuRuntimeException {
     

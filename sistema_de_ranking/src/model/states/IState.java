@@ -1,9 +1,9 @@
-package domain.interfaces;
+package model.states;
 
 import java.util.Scanner;
 
 /***
- * Interfaz mínima para cualquier estado y sub-estado de la aplicación.
+ * Interfaz mínima para cualquier estado de la aplicación.
  * Permite la interacción del usuario con la app mediante el teclado.
  * 
  * @author Brayan Montiel

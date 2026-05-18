@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-import domain.interfaces.IState;
-import domain.models.states.ExitState;
-import domain.models.states.MainMenuState;
+import model.states.ExitState;
+import model.states.IState;
+import model.states.MainMenuState;
 
 public class App {
 

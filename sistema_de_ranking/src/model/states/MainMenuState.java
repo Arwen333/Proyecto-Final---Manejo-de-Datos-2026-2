@@ -1,9 +1,9 @@
-package domain.models.states;
+package model.states;
 
 import java.util.Scanner;
-
-import domain.interfaces.IState;
-
+/**
+ * @author 
+ */
 public class MainMenuState implements IState {
 
     public IState execute(Scanner sc) {

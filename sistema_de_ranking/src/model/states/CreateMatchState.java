@@ -1,10 +1,11 @@
-package domain.models.states;
+package model.states;
 
 import java.util.Scanner;
 
-import domain.interfaces.IState;
-
-public class ExitState implements IState {
+/**
+ * @author 
+ */
+public class CreateMatchState implements IState {
 
     public IState execute(Scanner sc) {
 
