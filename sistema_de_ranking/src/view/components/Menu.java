@@ -39,7 +39,7 @@ public class Menu {
      */
     public void add(char option, String message) throws MenuOptionAlreadyExistsException {
 
-        if (_options.containsKey(option)) {
+        if (contains(option)) {
             throw new MenuOptionAlreadyExistsException("Opción \'" + option + "\' ya existe.");
         }
         _options.put(option, message);

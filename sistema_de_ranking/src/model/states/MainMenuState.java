@@ -13,6 +13,10 @@ import view.utils.InputValidator;
 public class MainMenuState implements IState {
 
     //#region Enumeraciones
+    /**
+     * Contiene opciones en un formato llave-mensaje enumeradas, correspondientes
+     * al menú principal que este {@code MainMenuState} despliega.
+     */
     private enum MainMenuOptions {
         // Opciones del menú principal, con su llave y mensaje asociado:
         RegisterPlayer('a', "Registrar jugador"),
@@ -27,6 +31,7 @@ public class MainMenuState implements IState {
         // Campo:
         public final char key;
         public final String message;
+
         // Construcción:
         /**
          * Crea un par llave-mensaje asociado a una enumeración,
@@ -38,6 +43,8 @@ public class MainMenuState implements IState {
             this.key = key;
             this.message = message;
         }
+
+        // Consulta:
         /**
          * Regresa una opción identificada de acuerdo a su caracter llave.
          * @param key - Llave de la opción buscada.
