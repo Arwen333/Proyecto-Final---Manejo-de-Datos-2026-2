@@ -12,7 +12,7 @@ import view.utils.InputValidator;
  */
 public class MainMenuState implements IState {
 
-    //#region Enumeraciones
+    //#region ENUMERACIONES
     /**
      * Contiene opciones en un formato llave-mensaje enumeradas, correspondientes
      * al menú principal que este {@code MainMenuState} despliega.
@@ -61,17 +61,17 @@ public class MainMenuState implements IState {
     }
     //#endregion
 
-    //#region Campo
+    //#region CAMPO
 
     // Menú que el estado despliega.
-    private static final Menu mainMenu = new Menu();
+    private static final Menu MAIN_MENU = new Menu();
 
     //#endregion
 
-    //#region Implementaciones
+    //#region IMPLEMENTACIONES
 
     public IState execute(Scanner sc) {
-        mainMenu.print("Seleccione la opción deseada:");
+        MAIN_MENU.print("Seleccione la opción deseada:");
         
         try {
             MainMenuOptions option = MainMenuOptions.fromKey(
@@ -106,28 +106,28 @@ public class MainMenuState implements IState {
 
     //#endregion
 
-    //#region Construcción
+    //#region CONSTRUCCIÓN
     /**
      * Construye un estado donde se imprime el menú principal
      * de la aplicación.
      */
     public MainMenuState() {
 
-        if (mainMenu.isEmpty()) {
+        if (MAIN_MENU.isEmpty()) {
             buildMainMenu();
         }
     }
     
     //#endregion
 
-    //#region Apoyo
+    //#region APOYO
     /**
      * Construye el menú principal.
      */
     private void buildMainMenu() {
 
         for (var element : MainMenuOptions.values()) {
-            mainMenu.add(element.key, element.message);
+            MAIN_MENU.add(element.key, element.message);
         }
     }
     //#endregion

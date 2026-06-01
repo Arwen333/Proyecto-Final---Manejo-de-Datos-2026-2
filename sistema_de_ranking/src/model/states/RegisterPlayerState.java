@@ -1,11 +1,12 @@
 package model.states;
 
 import java.util.Scanner;
+
 /**
  * @author 
  */
 public class RegisterPlayerState implements IState {
-
+    
     public IState execute(Scanner sc) {
 
         System.out.println(getClass().toString() + " no implementado. Regresando al menú principal");
