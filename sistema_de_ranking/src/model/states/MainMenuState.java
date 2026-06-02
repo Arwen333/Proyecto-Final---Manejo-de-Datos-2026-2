@@ -4,6 +4,8 @@ import java.util.Scanner;
 import exceptions.MenuOptionNotFoundException;
 import view.components.Menu;
 import view.utils.InputValidator;
+import controller.dao.TestDAO;  // ← AGREGAR ESTA IMPORTACIÓN
+
 /**
  * Despliega el menú principal y permite al usuario elegir una opción dentro de las
  * funciones de la aplicación.
@@ -78,21 +80,25 @@ public class MainMenuState implements IState {
                 InputValidator.nextChar(sc)
             );
             System.out.println("Ha elegido la opción " + option.key + ") " + option.message);
+            
+            // Crear una instancia de TestDAO para simular la base de datos
+            TestDAO testDAO = new TestDAO();
+            
             switch (option) {
                 case RegisterPlayer:
-                    return new RegisterPlayerState();
+                    return new RegisterPlayerState();        // Lo ajusta Brayan
                 case ShowPlayers:
-                    return new ShowPlayersState();
+                    return new ShowPlayersState();           // Lo ajusta Brayan
                 case SearchPlayer:
-                    return new SearchPlayerState();
+                    return new SearchPlayerState();          // Lo ajusta Brayan
                 case PlayerHistory:
-                    return new PlayerHistoryState();
+                    return new PlayerHistoryState(testDAO, testDAO);
                 case CreateMatch:
-                    return new CreateMatchState();
+                    return new CreateMatchState(testDAO, testDAO);
                 case ConsultRanking:
-                    return new ConsultRankingState();
+                    return new ConsultRankingState(testDAO);
                 case ExecuteMatch:
-                    return new ExecuteMatchState();
+                    return new ExecuteMatchState(testDAO, testDAO, testDAO);
                 case Exit:
                     return new ExitState();
             }
