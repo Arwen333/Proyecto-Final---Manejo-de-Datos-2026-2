@@ -7,6 +7,7 @@ import exceptions.MenuOptionNotFoundException;
 import view.components.IMenuOption;
 import view.components.Menu;
 import view.utils.InputValidator;
+
 /**
  * Despliega el menú principal y permite al usuario elegir una opción dentro de las
  * funciones de la aplicación.
@@ -93,7 +94,7 @@ public class MainMenuState implements IState {
                 case ConsultRanking:
                     return new ConsultRankingState(TestDAO.getInstance());
                 case ExecuteMatch:
-                    return new ExecuteMatchState(TestDAO.getInstance(), TestDAO.getInstance(), TestDAO.getInstance());
+                    return new ExecuteMatchState(TestDAO.getInstance(), TestDAO.getInstance());  // ✅ CORREGIDO: 2 parámetros
                 case Exit:
                     return new ExitState();
             }

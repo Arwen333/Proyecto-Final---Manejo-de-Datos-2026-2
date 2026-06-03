@@ -4,7 +4,6 @@ import java.util.Scanner;
  
 import controller.dao.IMatchHistoryDAO;
 import controller.dao.IPendingMatchDAO;
-import controller.dao.IPlayerDAO;
 import exceptions.MatchAlreadyExistsException;
 import model.Match;
 import model.Player;
@@ -16,18 +15,15 @@ import model.Player;
  */
 public class ExecuteMatchState implements IState {
  
-    private final IPlayerDAO playerDAO;
     private final IMatchHistoryDAO matchHistoryDAO;
     private final IPendingMatchDAO pendingMatchDAO;
  
     /**
      * Construye el estado con los DAOs necesarios para ejecutar una partida.
-     * @param playerDAO - DAO para acceder a los jugadores.
      * @param matchHistoryDAO - DAO para guardar el historial de partidas.
      * @param pendingMatchDAO - DAO para manejar la cola de partidas pendientes.
      */
-    public ExecuteMatchState(IPlayerDAO playerDAO, IMatchHistoryDAO matchHistoryDAO, IPendingMatchDAO pendingMatchDAO) {
-        this.playerDAO = playerDAO;
+    public ExecuteMatchState(IMatchHistoryDAO matchHistoryDAO, IPendingMatchDAO pendingMatchDAO) {
         this.matchHistoryDAO = matchHistoryDAO;
         this.pendingMatchDAO = pendingMatchDAO;
     }
