@@ -46,14 +46,14 @@ public class ConsultRankingState implements IState {
         }
  
         System.out.println();
-        System.out.print("Presione 'm' para volver al menú principal: ");
+        System.out.print("Presione 's' para volver al menú principal: ");
  
         while (true) {
             String input = sc.next().trim();
-            if (input.equalsIgnoreCase("m")) {
+            if (input.equalsIgnoreCase("s")) {
                 break;
             }
-            System.out.print("Ingrese 'm' para volver al menú principal: ");
+            System.out.print("Ingrese 's' para volver al menú principal: ");
         }
  
         return new MainMenuState();

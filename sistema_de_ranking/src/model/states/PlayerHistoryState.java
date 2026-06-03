@@ -58,7 +58,7 @@ public class PlayerHistoryState implements IState {
         Player jugador = playerDAO.getPlayerOrNull(id);
         if (jugador == null) {
             System.out.println("No se encontró ningún jugador con el ID: " + id);
-            System.out.print("Presione 'm' para volver al menú principal: ");
+            System.out.print("Presione 's' para volver al menú principal: ");
             esperarM(sc);
             return new MainMenuState();
         }
@@ -95,22 +95,22 @@ public class PlayerHistoryState implements IState {
         }
  
         System.out.println();
-        System.out.print("Presione 'm' para volver al menú principal: ");
+        System.out.print("Presione 's' para volver al menú principal: ");
         esperarM(sc);
         return new MainMenuState();
     }
  
     /**
-     * Espera a que el usuario presione 'm' para continuar.
+     * Espera a que el usuario presione 's' para continuar.
      * @param sc - Scanner para leer la entrada.
      */
     private void esperarM(Scanner sc) {
         while (true) {
             String input = sc.next().trim();
-            if (input.equalsIgnoreCase("m")) {
+            if (input.equalsIgnoreCase("s")) {
                 break;
             }
-            System.out.print("Ingrese 'm' para volver al menú principal: ");
+            System.out.print("Ingrese 's' para volver al menú principal: ");
         }
     }
 }

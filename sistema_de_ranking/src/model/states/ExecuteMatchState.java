@@ -36,7 +36,7 @@ public class ExecuteMatchState implements IState {
         // Verificar si hay partidas pendientes
         if (pendingMatchDAO.getPendingMatchesCount() == 0) {
             System.out.println("No hay partidas pendientes en la cola.");
-            System.out.print("Presione 'm' para volver al menú principal: ");
+            System.out.print("Presione 's' para volver al menú principal: ");
             esperarM(sc);
             return new MainMenuState();
         }
@@ -45,7 +45,7 @@ public class ExecuteMatchState implements IState {
         Match partida = pendingMatchDAO.consumeNextPendingMatch();
         if (partida == null) {
             System.out.println("No hay partidas pendientes en la cola.");
-            System.out.print("Presione 'm' para volver al menú principal: ");
+            System.out.print("Presione 's' para volver al menú principal: ");
             esperarM(sc);
             return new MainMenuState();
         }
@@ -93,7 +93,7 @@ public class ExecuteMatchState implements IState {
         }
  
         System.out.println();
-        System.out.print("Presione 'm' para volver al menú principal: ");
+        System.out.print("Presione 's' para volver al menú principal: ");
         esperarM(sc);
         return new MainMenuState();
     }
@@ -125,10 +125,10 @@ public class ExecuteMatchState implements IState {
     private void esperarM(Scanner sc) {
         while (true) {
             String input = sc.next().trim();
-            if (input.equalsIgnoreCase("m")) {
+            if (input.equalsIgnoreCase("s")) {
                 break;
             }
-            System.out.print("Ingrese 'm' para volver al menú principal: ");
+            System.out.print("Ingrese 's' para volver al menú principal: ");
         }
     }
 }

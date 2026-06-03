@@ -56,7 +56,7 @@ public class CreateMatchState implements IState {
         // Validar que no sean el mismo jugador
         if (jugador1.getName().equalsIgnoreCase(jugador2.getName())) {
             System.out.println("Un jugador no puede competir contra sí mismo.");
-            System.out.print("Presione 'm' para volver al menú principal: ");
+            System.out.print("Presione 's' para volver al menú principal: ");
             esperarM(sc);
             return new MainMenuState();
         }
@@ -74,7 +74,7 @@ public class CreateMatchState implements IState {
         }
  
         System.out.println();
-        System.out.print("Presione 'm' para volver al menú principal: ");
+        System.out.print("Presione 's' para volver al menú principal: ");
         esperarM(sc);
         return new MainMenuState();
     }
@@ -117,16 +117,16 @@ public class CreateMatchState implements IState {
     }
  
     /**
-     * Espera a que el usuario presione 'm' para continuar.
+     * Espera a que el usuario presione 's' para continuar.
      * @param sc - Scanner para leer la entrada.
      */
     private void esperarM(Scanner sc) {
         while (true) {
             String input = sc.next().trim();
-            if (input.equalsIgnoreCase("m")) {
+            if (input.equalsIgnoreCase("s")) {
                 break;
             }
-            System.out.print("Ingrese 'm' para volver al menú principal: ");
+            System.out.print("Ingrese 's' para volver al menú principal: ");
         }
     }
 }
