@@ -1,11 +1,12 @@
 package model.states;
 
 import java.util.Scanner;
+
+import controller.dao.TestDAO;
 import exceptions.MenuOptionNotFoundException;
+import view.components.IMenuOption;
 import view.components.Menu;
 import view.utils.InputValidator;
-import controller.dao.TestDAO;  // ← AGREGAR ESTA IMPORTACIÓN
-
 /**
  * Despliega el menú principal y permite al usuario elegir una opción dentro de las
  * funciones de la aplicación.
@@ -15,11 +16,12 @@ import controller.dao.TestDAO;  // ← AGREGAR ESTA IMPORTACIÓN
 public class MainMenuState implements IState {
 
     //#region ENUMERACIONES
+
     /**
-     * Contiene opciones en un formato llave-mensaje enumeradas, correspondientes
-     * al menú principal que este {@code MainMenuState} despliega.
+     * Contiene a todas las opciones que ofrece el sistema de ranking y que
+     * este estado despliega como menú principal.
      */
-    private enum MainMenuOptions {
+    private enum MainMenuOptions implements IMenuOption {
         // Opciones del menú principal, con su llave y mensaje asociado:
         RegisterPlayer('a', "Registrar jugador"),
         ShowPlayers('b', "Mostrar jugadores"),
@@ -35,30 +37,25 @@ public class MainMenuState implements IState {
         public final String message;
 
         // Construcción:
+
         /**
-         * Crea un par llave-mensaje asociado a una enumeración,
-         * para representar una opción del menú principal.
-         * @param key
-         * @param message
+         * Construye una opción del menú con un identificador (llave) y
+         * una descripción textual.
+         * @param key - Llave de la opción.
+         * @param message - Descripción de la opción.
          */
         private MainMenuOptions(char key, String message) {
             this.key = key;
             this.message = message;
         }
 
-        // Consulta:
-        /**
-         * Regresa una opción identificada de acuerdo a su caracter llave.
-         * @param key - Llave de la opción buscada.
-         * @return La opción que cuya llave es el caracter {@code key}.
-         * @throws MenuOptionNotFoundException Si ninguna opción tiene la llave {@code key}. 
-         */
-        public static MainMenuOptions fromKey(char key) throws MenuOptionNotFoundException {
-            for (var option : MainMenuOptions.values()) {
-                if (option.key == key) return option;
-            }
-            throw new MenuOptionNotFoundException("Ninguna opción contiene la llave \'" + key + "\'");
-        }
+        // Implementaciones:
+        
+        @Override
+        public char getKey() { return key; }
+
+        @Override
+        public String getMessage() { return message; }
         
     }
     //#endregion
@@ -76,29 +73,27 @@ public class MainMenuState implements IState {
         MAIN_MENU.print("Seleccione la opción deseada:");
         
         try {
-            MainMenuOptions option = MainMenuOptions.fromKey(
+            
+            MainMenuOptions option = IMenuOption.fromKey( 
+                MainMenuOptions.class,
                 InputValidator.nextChar(sc)
             );
             System.out.println("Ha elegido la opción " + option.key + ") " + option.message);
-            
-            // Crear una instancia de TestDAO para simular la base de datos
-            TestDAO testDAO = new TestDAO();
-            
             switch (option) {
                 case RegisterPlayer:
-                    return new RegisterPlayerState();        // Lo ajusta Brayan
+                    return new RegisterPlayerState(TestDAO.getInstance());
                 case ShowPlayers:
-                    return new ShowPlayersState();           // Lo ajusta Brayan
+                    return new ShowPlayersState(TestDAO.getInstance());
                 case SearchPlayer:
-                    return new SearchPlayerState();          // Lo ajusta Brayan
+                    return new SearchPlayerState(TestDAO.getInstance());
                 case PlayerHistory:
-                    return new PlayerHistoryState(testDAO, testDAO);
+                    return new PlayerHistoryState(TestDAO.getInstance(), TestDAO.getInstance());
                 case CreateMatch:
-                    return new CreateMatchState(testDAO, testDAO);
+                    return new CreateMatchState(TestDAO.getInstance(), TestDAO.getInstance());
                 case ConsultRanking:
-                    return new ConsultRankingState(testDAO);
+                    return new ConsultRankingState(TestDAO.getInstance());
                 case ExecuteMatch:
-                    return new ExecuteMatchState(testDAO, testDAO, testDAO);
+                    return new ExecuteMatchState(TestDAO.getInstance(), TestDAO.getInstance(), TestDAO.getInstance());
                 case Exit:
                     return new ExitState();
             }

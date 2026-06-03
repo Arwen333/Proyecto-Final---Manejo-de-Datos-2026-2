@@ -1,45 +1,61 @@
 package model.states;
-
+ 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+ 
 import controller.dao.IPlayerDAO;
 import model.Player;
-
+ 
+/**
+ * Muestra el listado de jugadores ordenado de mayor a menor puntaje,
+ * representando el ranking general del torneo.
+ * @author Arwen Ortiz
+ */
 public class ConsultRankingState implements IState {
-    
-    private IPlayerDAO playerDAO;
-    
+ 
+    private final IPlayerDAO playerDAO;
+ 
+    /**
+     * Construye el estado con el DAO necesario para consultar el ranking.
+     * @param playerDAO - DAO para acceder a los jugadores.
+     */
     public ConsultRankingState(IPlayerDAO playerDAO) {
         this.playerDAO = playerDAO;
     }
-    
+ 
     @Override
     public IState execute(Scanner sc) {
-        System.out.println("\n=== RANKING GENERAL ===");
-        
+ 
         ArrayList<Player> ranking = playerDAO.getRanking();
-        
+ 
         if (ranking.isEmpty()) {
-            System.out.println(" No hay jugadores registrados.");
-        } else {
-            System.out.println("\n┌────┬──────────────────────┬────────────┐");
-            System.out.println("│ #  │ Nombre               │ Puntaje    │");
-            System.out.println("├────┼──────────────────────┼────────────┤");
-            
-            int posicion = 1;
-            for (Player p : ranking) {
-                System.out.printf("│ %-2d │ %-20s │ %-10d │\n", posicion, p.getNombre(), p.getPuntajeAcumulado());
-                posicion++;
-            }
-            System.out.println("└────┴──────────────────────┴────────────┘");
-        }
-        
-        System.out.print("\nPresione 'm' para volver al menú principal, cualquier otra tecla para continuar: ");
-        String opcion = sc.nextLine();
-        if (opcion.equalsIgnoreCase("m")) {
+            System.out.println("Ningún jugador ha sido registrado todavía.");
+            System.out.println("Volviendo al menú principal.");
             return new MainMenuState();
         }
+ 
+        System.out.println("=== RANKING GENERAL ===");
+        System.out.println();
+ 
+        int position = 1;
+        for (Player player : ranking) {
+            System.out.println(position + ". " + player.getName()
+                + " | Nivel: " + player.getLevel()
+                + " | Puntaje: " + player.getAcumScore());
+            position++;
+        }
+ 
+        System.out.println();
+        System.out.print("Presione 'm' para volver al menú principal: ");
+ 
+        while (true) {
+            String input = sc.next().trim();
+            if (input.equalsIgnoreCase("m")) {
+                break;
+            }
+            System.out.print("Ingrese 'm' para volver al menú principal: ");
+        }
+ 
         return new MainMenuState();
     }
 }

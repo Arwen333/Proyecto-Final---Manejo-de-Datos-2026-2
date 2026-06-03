@@ -1,145 +1,110 @@
 package controller.dao;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-
 import exceptions.MatchAlreadyExistsException;
 import exceptions.PlayerAlreadyExistsException;
 import exceptions.PlayerNotFoundException;
 import model.Match;
 import model.Player;
-
 /**
- * Clase de prueba para probar el correcto flujo de la aplicación.
- * Simula una base de datos en memoria.
+ * Clase de prueba para comprobar el correcto flujo de la aplicación.
  * @author Arwen Ortiz, Brayan Montiel
  */
 public class TestDAO implements IMatchHistoryDAO, IPendingMatchDAO, IPlayerDAO {
-    
-    // Simulación de base de datos en memoria
-    private ArrayList<Player> jugadores = new ArrayList<>();
-    private Queue<Match> colaPendientes = new LinkedList<>();
-    private ArrayList<Match> historialPartidas = new ArrayList<>();
-    private int nextPlayerId = 1;
-    private int nextMatchId = 1;
-    
+    private static TestDAO instance;
+    private TestDAO() {
+        // Aquí inicializa a todos los campos con valores por defecto (al iniciar la app por 1era vez), menos a 'instance'
+    }
+    public static TestDAO getInstance() {
+        if (instance == null)
+        {
+            instance = new TestDAO();
+        }
+        return instance;
+    }
+ 
+    // ── De Brayan - no modificar ─────────────────────────────────────────────
+ 
     @Override
     public void register(Player player) throws PlayerAlreadyExistsException {
-        if (isRegistered(player.getNombre())) {
-            throw new PlayerAlreadyExistsException("Player " + player.getNombre() + " already exists");
-        }
-        player.setId(nextPlayerId++);
-        jugadores.add(player);
-        System.out.println("[TESTDAO] Player registered: " + player);
+        System.out.println("[TestDAO] Método register ejecutado con éxito.");
     }
-    
     @Override
     public Player getPlayerOrNull(String name) {
-        for (Player p : jugadores) {
-            if (p.getNombre().equalsIgnoreCase(name)) {
-                return p;
-            }
-        }
-        return null;
+        System.out.println("[TestDAO] Método getPlayerOrNull ejecutado con éxito");
+        return new Player("Panchito", 0, 0);
     }
-    
     @Override
     public Player getPlayerOrNull(int id) {
-        for (Player p : jugadores) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
+        System.out.println("[TestDAO] Método getPlayerOrNull ejecutado con éxito");
+        return new Player("Panchito", 0, 0);
     }
-    
     @Override
     public boolean isRegistered(String name) {
-        for (Player p : jugadores) {
-            if (p.getNombre().equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
+        System.out.println("[TestDAO] Método isRegistered ejecutado con éxito");
         return false;
     }
-    
     @Override
     public boolean isAnyPlayerRegistered() {
-        return !jugadores.isEmpty();
+        System.out.println("[TestDAO] Método isAnyPlayerRegistered ejecutado con éxito");
+        return true;
     }
-    
     @Override
     public ArrayList<Player> getRegisteredPlayers() {
-        return new ArrayList<>(jugadores);
+        System.out.println("[TestDAO] Método getRegisteredPlayers ejecutado con éxito");
+        ArrayList<Player> output = new ArrayList<>();
+        output.add(new Player("Panchito", 0, 0));
+        return output;
     }
-    
+ 
+    // ── De Arwen - métodos para mis estados ──────────────────────────────────
+ 
     @Override
     public ArrayList<Player> getRanking() {
-        ArrayList<Player> ranking = new ArrayList<>(jugadores);
-        ranking.sort((p1, p2) -> Integer.compare(p2.getPuntajeAcumulado(), p1.getPuntajeAcumulado()));
-        return ranking;
+        System.out.println("[TestDAO] Generando ranking");
+        ArrayList<Player> output = new ArrayList<>();
+        output.add(new Player("Carlos", 3, 320));
+        output.add(new Player("Ana", 2, 150));
+        output.add(new Player("Luis", 1, 80));
+        return output;
     }
-    
     @Override
     public int getPlayersCount() {
-        return jugadores.size();
+        System.out.println("[TestDAO] Método getPlayersCount ejecutado con éxito");
+        return 3;
     }
-    
     @Override
     public void enqueueMatch(Match match) throws MatchAlreadyExistsException {
-        match.setId(nextMatchId++);
-        colaPendientes.offer(match);
-        System.out.println("[TESTDAO] Match enqueued: " + match);
+        System.out.println("[TestDAO] Partida encolada con éxito.");
     }
-    
     @Override
     public int getPendingMatchesCount() {
-        return colaPendientes.size();
+        System.out.println("[TestDAO] Método getPendingMatchesCount ejecutado con éxito");
+        return 1;
     }
-    
     @Override
     public Match consumeNextPendingMatch() {
-        Match match = colaPendientes.poll();
-        if (match != null) {
-            System.out.println("[TESTDAO] Match consumed from queue: " + match);
-        }
-        return match;
+        System.out.println("[TestDAO] Método consumeNextPendingMatch ejecutado con éxito");
+        Player p1 = new Player("Carlos", 3, 320);
+        Player p2 = new Player("Ana", 2, 150);
+        return new Match(p1, p2);
     }
-    
     @Override
     public List<Match> getLastMatches(int playerId, int n) throws PlayerNotFoundException {
-        Player jugador = getPlayerOrNull(playerId);
-        if (jugador == null) {
-            throw new PlayerNotFoundException("Player with ID " + playerId + " not found");
-        }
-        
-        List<Match> resultado = new ArrayList<>();
-        for (Match m : historialPartidas) {
-            if (m.getEstado() != null && m.getEstado().equals("completada")) {
-                if (m.getJugador1().getId() == playerId || m.getJugador2().getId() == playerId) {
-                    resultado.add(m);
-                }
-            }
-        }
-        
-        resultado.sort((m1, m2) -> m2.getFecha().compareTo(m1.getFecha()));
-        if (resultado.size() > n) {
-            return resultado.subList(0, n);
-        }
-        return resultado;
+        System.out.println("[TestDAO] Método getLastMatches ejecutado con éxito");
+        List<Match> output = new ArrayList<>();
+        Player p1 = new Player("Carlos", 3, 320);
+        Player p2 = new Player("Ana", 2, 150);
+        output.add(new Match(p1, p2));
+        return output;
     }
-    
     @Override
     public void saveCompletedMatch(Match match) throws MatchAlreadyExistsException {
-        match.setEstado("completada");
-        historialPartidas.add(match);
-        System.out.println("[TESTDAO] Completed match saved: " + match);
+        System.out.println("[TestDAO] Partida guardada en historial con éxito.");
     }
-    
     @Override
     public int getMatchesCount() {
-        return historialPartidas.size();
+        System.out.println("[TestDAO] Método getMatchesCount ejecutado con éxito");
+        return 1;
     }
 }

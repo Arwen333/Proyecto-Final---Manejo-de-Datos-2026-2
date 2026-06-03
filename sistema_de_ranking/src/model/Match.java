@@ -1,7 +1,7 @@
 package model;
 //version TEMPORAL para pruebas 
 import java.time.LocalDate;
-
+ 
 public class Match {
     private int id;
     private Player jugador1;
@@ -59,7 +59,7 @@ public class Match {
     
     @Override
     public String toString() {
-        return "Partida " + id + ": " + jugador1.getNombre() + " vs " + jugador2.getNombre() + 
+        return "Partida " + id + ": " + jugador1.getName() + " vs " + jugador2.getName() + 
                " | " + puntajeJugador1 + "-" + puntajeJugador2 + " | " + estado;
     }
 }
